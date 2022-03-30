@@ -12,7 +12,7 @@ sr = pd.read_csv(file_path)
 
 # ----- geonames stuff -------
 base_url = r'http://api.geonames.org/searchJSON?'
-uname = 'mciethan'
+uname = REDACTED
 
 # replace misread characters with their literals, and ; with , for simplicity
 sr['Location'] = sr['Location'].str.replace('[APOS]', '\'', regex=False)

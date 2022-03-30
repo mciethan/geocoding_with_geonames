@@ -1,2 +1,10 @@
-# geocoding_with_geonames
-Python script for geocoding messy place names using the GeoNames API.
+## Background and Rationale
+As a GIS and Data Associate working in the Brown library, I was asked to explore geocoding options for the Stolen Relations project (https://library.brown.edu/create/cds/database-of-indigenous-slavery-in-the-americas/), which seeks to document histories of enslavement of indigenous peoples in the Americas.  People associated with this project had scoured the archives and assembled a table with thousands of records of indigenous enslavement spanning several centuries.  One of the columns in this table listed location information associated with each record, and they were looking to plot each record as a point on the map by identifying coordinates for each place name.
+
+Several aspects of this dataset made it challenging to achieve good results using traditional geocoding services.  Each location had an indeterminate number of components, the level of spatial detail ranged from individual buildings to entire countries, and everything was in a single column rather than being split in some way to identify different components of each place name.  Many of the place names themselves were colonial names that are no longer in use.  And in some cases, what was listed in the location column was not a single place name with ordered components, but a collection of distinct place names that were all mentioned in a particular historical record.  
+
+Running the original dataset through the ArcGIS World Geocoding Service resulted in hundreds of incorrectly plotted points.  Doing some pre-processing to identify and split country, state, or city names into their own columns and running that through ArcGIS's geocoding service reduced some of the false matches, but still failed to plot points for hundreds of records.
+
+This script represents my first attempt at implementing a custom geocoding algorithm, and its features are tailored to work well with the Stolen Relations data.  Each place name is treated as a collection of comma-separated strings, without any additional string searching.  Each comma-separated component of each place name is considered in order, starting from the end, and results from each component are used to narrow the search for the next component.  
+
+(under construction)
